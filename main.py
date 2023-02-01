@@ -58,22 +58,26 @@ def snake_game():
 
         # --- detect collision with wall ---
         if snake.head.xcor() > 295 or snake.head.xcor() < -295 or snake.head.ycor() > 295 or snake.head.ycor() < -295:
-            scoreboard.game_over()
-            game_is_on = False
+            scoreboard.reset_scoreboard()
+            snake.reset()
+            food.refresh()
 
         # --- detect collision with tail ---
         for segment in snake.snake_segments[1:]:
             if snake.head.distance(segment) < 10:
-                scoreboard.game_over()
-                game_is_on = False
+                scoreboard.reset_scoreboard()
+                snake.reset()
+                food.refresh()
 
 
-while play_again:
-    snake_game()
-    another_game = turtle.textinput("Snake Game", "Do you want to play again?").lower()
-    if another_game == "yes":
-        screen.clear()
-    else:
-        play_again = False
+snake_game()
+
+# while play_again:
+#     snake_game()
+#     another_game = turtle.textinput("Snake Game", "Do you want to play again?").lower()
+#     if another_game == "yes":
+#         screen.clear()
+#     else:
+#         play_again = False
 
 screen.exitonclick()
